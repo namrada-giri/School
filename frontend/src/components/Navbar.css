@@ -1,102 +1,132 @@
+/* ════════════════════════════════════════════════════════════
+   Himalayan World School — Navbar
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  --nav-navy: #0b2b8b;
+  --nav-navy-dark: #081f63;
+  --nav-ink: #1f2933;
+  --nav-muted: #5a6573;
+  --nav-line: #e9edf5;
+  --nav-tint: #eef3ff;
+  --nav-h-desktop: 84px;
+  --nav-h-mobile: 68px;
+}
+
+/* ─── Base navbar ───────────────────────────────────────────── */
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0 0 auto 0;
   z-index: 1000;
   background: #ffffff;
-  transition: background 0.2s ease, box-shadow 0.2s ease;
+  transition: box-shadow 0.25s ease;
 }
 
 .navbar.scrolled {
-  background: #ffffff;
-  box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 28px rgba(11, 43, 139, 0.10);
 }
 
+/* keep the bar visually clean while the drawer is open */
+.navbar.menu-open {
+  box-shadow: none;
+}
+
+/* ─── Top utility bar ───────────────────────────────────────── */
 .nav-top {
-  background: #0b2b8b;
+  background: linear-gradient(90deg, var(--nav-navy-dark), var(--nav-navy));
   color: #ffffff;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
 }
 
 .nav-top-inner {
-  min-height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 16px;
-}
-
-.nav-top a {
-  color: #ffffff;
-  font-weight: 800;
-  text-decoration: none;
-}
-
-.nav-container {
-  min-height: 86px;
+  min-height: 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 28px;
+  gap: 16px;
 }
 
+.nav-top-tag {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.nav-top-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #ffffff;
+  font-weight: 800;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.nav-top-phone:hover { opacity: 0.82; }
+
+.nav-top-phone svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* ─── Nav container ─────────────────────────────────────────── */
+.nav-container {
+  min-height: var(--nav-h-desktop);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* ─── Logo ──────────────────────────────────────────────────── */
 .nav-logo {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
-  padding: 10px 14px;
-  border-radius: 18px;
-  background: rgba(0, 82, 204, 0.08);
-  transition: transform 0.2s ease, background 0.2s ease;
+  gap: 13px;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
 }
 
-.nav-logo:hover {
-  transform: translateY(-1px);
-  background: rgba(0, 82, 204, 0.12);
-}
+.nav-logo:hover { transform: translateY(-1px); }
 
 .logo {
-  width: 58px;
-  height: 58px;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 82, 204, 0.12);
-}
-
-.logo img {
-  width: 100%;
-  height: 100%;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
   object-fit: cover;
+  box-shadow: 0 8px 20px rgba(11, 43, 139, 0.18);
 }
 
 .logo-copy {
   display: flex;
   flex-direction: column;
-  line-height: 1.05;
+  line-height: 1.08;
 }
 
 .logo-copy strong {
-  color: #0b2b8b;
-  font-size: 1.28rem;
+  color: var(--nav-navy);
+  font-size: 1.24rem;
   font-weight: 900;
+  letter-spacing: -0.01em;
 }
 
 .logo-copy small {
-  color: #2a4f7e;
-  font-size: 0.75rem;
+  color: var(--nav-muted);
+  font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
 }
 
+/* ─── Desktop nav links ─────────────────────────────────────── */
 .nav-links {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0;
+  gap: 2px;
   flex: 1 1 auto;
+  justify-content: center;
   padding: 0;
   margin: 0;
   list-style: none;
@@ -107,101 +137,480 @@
 }
 
 .nav-links > li > a {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  min-height: 86px;
-  padding: 0 12px;
-  border-radius: 0;
-  color: #1f2933;
-  font-size: 0.84rem;
+  gap: 5px;
+  height: var(--nav-h-desktop);
+  padding: 0 16px;
+  color: var(--nav-ink);
+  font-size: 0.86rem;
   font-weight: 800;
   text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+/* animated underline */
+.nav-links > li > a::after {
+  content: '';
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--nav-navy);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
 }
 
 .nav-links > li > a:hover,
 .nav-links > li > a.active {
-  background: transparent;
-  color: #0b2b8b;
+  color: var(--nav-navy);
 }
 
+.nav-links > li > a:hover::after,
+.nav-links > li > a.active::after {
+  transform: scaleX(1);
+}
+
+.chevron-icon {
+  width: 13px;
+  height: 13px;
+  opacity: 0.55;
+  transition: transform 0.25s ease;
+}
+
+.nav-links > li.has-dropdown:hover .chevron-icon {
+  transform: rotate(180deg);
+}
+
+/* ─── Desktop dropdown ──────────────────────────────────────── */
 .nav-dropdown {
   position: absolute;
-  top: 100%;
-  left: 0;
-  width: 220px;
-  display: none;
-  padding: 10px 0;
+  top: calc(var(--nav-h-desktop) - 14px);
+  left: 50%;
+  width: 232px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
   background: #ffffff;
-  border-top: 3px solid #0b2b8b;
-  box-shadow: 0 16px 35px rgba(20, 24, 31, 0.16);
+  border: 1px solid var(--nav-line);
+  box-shadow: 0 20px 44px rgba(11, 43, 139, 0.16);
+  border-radius: 14px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
 }
 
-.nav-links > li:hover .nav-dropdown {
-  display: grid;
+.nav-links > li.has-dropdown:hover .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* hover bridge so the dropdown doesn't vanish in the gap */
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  height: 14px;
 }
 
 .nav-dropdown a {
-  padding: 9px 16px;
-  color: #3d4652;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 12px;
+  color: var(--nav-muted);
   font-size: 0.84rem;
   font-weight: 700;
   text-decoration: none;
+  border-radius: 9px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.dropdown-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #c3cee6;
+  flex-shrink: 0;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
 
 .nav-dropdown a:hover {
-  color: #0b2b8b;
-  background: #f7eef0;
+  color: var(--nav-navy);
+  background: var(--nav-tint);
 }
 
+.nav-dropdown a:hover .dropdown-dot {
+  background: var(--nav-navy);
+  transform: scale(1.4);
+}
+
+/* ─── Nav actions ───────────────────────────────────────────── */
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
-  flex: 0 0 auto;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
-.theme-toggle,
-.hamburger {
-  width: 42px;
-  height: 42px;
+.btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  background: #ffffff;
-  color: #0b2b8b;
+  padding: 11px 22px;
+  background: var(--nav-navy);
+  color: #ffffff;
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 10px;
+  border: none;
   cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px rgba(11, 43, 139, 0.22);
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
 
-.nav-cta {
-  min-height: 42px;
-  padding: 10px 18px;
+.btn-primary:hover {
+  background: var(--nav-navy-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(11, 43, 139, 0.28);
 }
 
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* ─── Hamburger ─────────────────────────────────────────────── */
 .hamburger {
   display: none;
-  flex-direction: column;
-  gap: 5px;
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid var(--nav-line);
+  border-radius: 11px;
+  background: #ffffff;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  flex-shrink: 0;
+  transition: border-color 0.18s ease, background 0.18s ease;
 }
 
-.hamburger span {
-  width: 20px;
+.hamburger:hover {
+  border-color: var(--nav-navy);
+  background: var(--nav-tint);
+}
+
+.bar {
+  display: block;
+  width: 21px;
   height: 2px;
-  background: currentColor;
+  background: var(--nav-navy);
+  border-radius: 2px;
+  position: absolute;
+  left: 50%;
+  margin-left: -10.5px;
+  transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.2s ease, top 0.32s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.bar-1 { top: 14px; }
+.bar-2 { top: 21px; }
+.bar-3 { top: 28px; }
+
+.hamburger.open .bar-1 { top: 21px; transform: rotate(45deg); }
+.hamburger.open .bar-2 { opacity: 0; transform: scaleX(0); }
+.hamburger.open .bar-3 { top: 21px; transform: rotate(-45deg); }
+
+/* ─── Mobile backdrop ───────────────────────────────────────── */
+.mobile-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 18, 48, 0.5);
+  backdrop-filter: blur(3px);
+  z-index: 998;
+  opacity: 0;
+  pointer-events: none; /* invisible state must not block clicks */
+  transition: opacity 0.3s ease;
+}
+
+.mobile-backdrop--visible {
+  opacity: 1;
+  pointer-events: auto; /* only catch clicks while the menu is open */
+}
+
+/* ─── Mobile drawer ─────────────────────────────────────────── */
 .mobile-menu {
   display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(360px, 90vw);
+  background: #ffffff;
+  z-index: 999;
+  transform: translateX(100%);
+  transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1);
+  box-shadow: -16px 0 50px rgba(8, 18, 48, 0.22);
+  visibility: hidden; /* off-screen drawer must not intercept touches */
+  transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1),
+              visibility 0s linear 0.38s;
 }
 
-@media (max-width: 920px) {
-  .nav-top {
-    display: none;
+.mobile-menu--open {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform 0.38s cubic-bezier(0.32, 0.72, 0, 1),
+              visibility 0s linear 0s;
+}
+
+.mobile-menu-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-top: var(--nav-h-mobile);
+  overflow-y: auto;
+}
+
+.mobile-menu-head {
+  padding: 18px 24px 10px;
+}
+
+.mobile-menu-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #aab4c8;
+}
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0 12px;
+}
+
+.mobile-nav-item {
+  border-bottom: 1px solid var(--nav-line);
+}
+.mobile-nav-item:last-child {
+  border-bottom: none;
+}
+
+/* plain link */
+.mobile-nav-link {
+  display: block;
+  padding: 15px 12px;
+  color: var(--nav-ink);
+  font-size: 0.96rem;
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  color: var(--nav-navy);
+  background: var(--nav-tint);
+}
+
+/* accordion trigger */
+.mobile-nav-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px 12px;
+  background: none;
+  border: none;
+  color: var(--nav-ink);
+  font-size: 0.96rem;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 10px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.mobile-nav-trigger:hover,
+.mobile-nav-trigger.active,
+.mobile-nav-trigger.expanded {
+  color: var(--nav-navy);
+}
+
+.mobile-nav-trigger.expanded {
+  background: var(--nav-tint);
+}
+
+.accordion-chevron {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  opacity: 0.6;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-nav-trigger.expanded .accordion-chevron {
+  transform: rotate(180deg);
+}
+
+/* accordion sub-nav — smooth grid-row collapse */
+.mobile-subnav {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-subnav--open {
+  grid-template-rows: 1fr;
+}
+
+.mobile-subnav-track {
+  overflow: hidden;
+  padding-left: 12px;
+}
+
+.mobile-subnav-overview {
+  display: block;
+  padding: 10px 12px;
+  margin-top: 4px;
+  color: var(--nav-navy);
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.mobile-subnav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 12px;
+  color: var(--nav-muted);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 9px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.mobile-subnav-link:hover {
+  color: var(--nav-navy);
+  background: var(--nav-tint);
+}
+
+.mobile-subnav-link svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  opacity: 0.45;
+}
+
+/* ─── Mobile drawer footer (CTA inside hamburger) ──────────── */
+.mobile-menu-footer {
+  margin-top: auto;
+  padding: 20px 24px calc(20px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  background: #fafbfe;
+  border-top: 1px solid var(--nav-line);
+}
+
+.mobile-cta {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 0.95rem;
+  border-radius: 11px;
+}
+
+.mobile-phone-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  color: var(--nav-navy);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-decoration: none;
+  border: 1.5px solid var(--nav-line);
+  border-radius: 11px;
+  background: #ffffff;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.mobile-phone-link:hover {
+  background: var(--nav-tint);
+  border-color: var(--nav-navy);
+}
+
+.mobile-phone-link svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+/* ─── Responsive breakpoints ────────────────────────────────── */
+
+/* Tablet range (768–980px) — keep desktop links, tighten spacing
+   so the logo + 4 links + CTA don't collide before collapse */
+@media (max-width: 980px) {
+  .nav-container {
+    gap: 14px;
   }
 
+  .nav-links {
+    gap: 0;
+  }
+
+  .nav-links > li > a {
+    padding: 0 11px;
+    font-size: 0.82rem;
+  }
+
+  .nav-links > li > a::after {
+    left: 11px;
+    right: 11px;
+  }
+
+  .btn-primary {
+    padding: 10px 16px;
+  }
+
+  .logo {
+    width: 46px;
+    height: 46px;
+  }
+
+  .logo-copy strong {
+    font-size: 1.1rem;
+  }
+}
+
+/* Hide the second-line label a bit earlier to save width on tablets */
+@media (max-width: 860px) {
+  .logo-copy small {
+    display: none;
+  }
+}
+
+/* Tablet & below — collapse to hamburger */
+@media (max-width: 768px) {
   .nav-container {
-    min-height: 76px;
+    min-height: var(--nav-h-mobile);
+    gap: 16px;
   }
 
   .nav-links,
@@ -210,36 +619,34 @@
   }
 
   .hamburger {
-    display: inline-flex;
+    display: block;
   }
 
   .mobile-menu {
-    display: grid;
-    gap: 6px;
-    margin: 0 14px 14px;
-    padding: 12px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: #ffffff;
-    box-shadow: var(--shadow-lg);
+    display: block;
   }
 
-  .mobile-menu a {
-    padding: 12px;
-    border-radius: 4px;
-    color: var(--text-primary);
-    font-weight: 800;
-    text-decoration: none;
-  }
-
-  .mobile-menu a.active {
-    color: var(--brand-dark);
-    background: var(--bg-muted);
+  .mobile-backdrop {
+    display: block;
   }
 }
 
-@media (max-width: 520px) {
-  .logo-copy small {
+/* Small phones */
+@media (max-width: 480px) {
+  .nav-top-tag {
     display: none;
+  }
+
+  .nav-top-inner {
+    justify-content: center;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .navbar *,
+  .mobile-menu,
+  .mobile-backdrop {
+    transition-duration: 0.01ms !important;
   }
 }
