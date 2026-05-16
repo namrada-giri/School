@@ -202,7 +202,7 @@ export default function Home() {
 */}
       <section className="results-section">
         <div className="container results-grid">
-          <img src={campusImage} alt="College campus and facilities" />
+          <img src={campusImage} alt="College campus and facilitiess" />
           <div>
             <span className="small-title">About College</span>
             <h2>
